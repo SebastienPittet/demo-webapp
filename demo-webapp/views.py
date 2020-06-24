@@ -11,13 +11,13 @@ def main():
     hostname = socket.gethostname()
     ip_addr = get('https://api.ipify.org').text
     time_request = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
-    server = {'hostname': hostname,
+    server_name = {'hostname': hostname,
               'ipaddr': ip_addr,
               'time_request':time_request}
 
     return render_template('index.html',
-                           title="Exoscale powered by Lenovo",
-                           server = server)
+                           title="Exoscale ping times",
+                           server = server_name)
 
 
 if __name__ == "__main__":
