@@ -1,12 +1,11 @@
-from flask import Flask, render_template
+from flask import render_template
 import socket
 import time
 from requests import get
 from flask import make_response
 from functools import wraps, update_wrapper
 from datetime import datetime
-
-demowebapp = Flask(__name__)
+from app import app
 
 
 def nocache(view): # avoid caching
@@ -22,8 +21,8 @@ def nocache(view): # avoid caching
 
 
 
-@demowebapp.route("/")
-@demowebapp.route("/index")
+@app.route("/")
+@app.route("/index")
 @nocache # avoid caching on this view
 def main():
     hostname = socket.gethostname()
