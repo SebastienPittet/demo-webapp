@@ -4,7 +4,7 @@ RUN apk upgrade --update \
     && apk add bash nano
 
 COPY ./main.py /app
-COPY ./requirements.txt /demoapp/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
 COPY ./app /app/app
 COPY ./uwsgi.ini /app
 
