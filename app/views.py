@@ -19,7 +19,45 @@ def nocache(view): # avoid caching
         return response
     return update_wrapper(no_cache, view)
 
+def getRandomAdvice():
+    try:
+        r = get('https://api.adviceslip.com/advice').json()
+        randomAdvice = {
+            "id" : r['slip']['id'],
+            "advice" : r['slip']['advice'],
+        }
+    except requests.exceptions.TooManyRedirects:
+        # Tell the user their URL was bad and try a different one
+        randomAdvice = {
+            "id" : r['slip']['Error'],
+            "advice" : r['slip']['Too many redirects.'],
+        }
+    except requests.exceptions.Timeout:
+        # Maybe set up for a retry, or continue in a retry loop
+        randomAdvice = {
+            "id" : r['slip']['Error'],
+            "advice" : r['slip']['Timeout.'],
+        }
+    except requests.exceptions.ConnectionError:
+        # DNS failure, refused connection, etc
+        randomAdvice = {
+            "id" : r['slip']['Error'],
+            "advice" : r['slip']['Connection Error.'],
+        }
+    except requests.exceptions.HTTPError:
+        # invalid HTTP response
+        randomAdvice = {
+            "id" : r['slip']['Error'],
+            "advice" : r['slip']['Invalid HTTP response.'],
+        }
+    except requests.exceptions.RequestException as e:
+        # catastrophic error. bail.
+        randomAdvice = {
+            "id" : r['slip']['Error'],
+            "advice" : r['slip']['Catastrophic Error.'],
+        }
 
+    return randomAdvice
 
 @app.route("/")
 @app.route("/index")
@@ -33,8 +71,9 @@ def main():
               'time_request':time_request}
 
     return render_template('index.html',
-                           title="Exoscale 'ping times'",
-                           server = server_name)
+                           title="Demo webapp",
+                           server = server_name,
+                           advice = getRandomAdvice())
 
 
 if __name__ == "__main__":
