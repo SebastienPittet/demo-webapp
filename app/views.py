@@ -19,42 +19,43 @@ def nocache(view): # avoid caching
         return response
     return update_wrapper(no_cache, view)
 
+
 def getRandomAdvice():
     try:
         r = get('https://api.adviceslip.com/advice').json()
         randomAdvice = {
-            "id" : r[ 'slip'][ 'id'],
-            "advice" : r[ 'slip'][ 'advice'],
+            "id": r['slip']['id'],
+            "advice": r['slip']['advice'],
         }
     except requests.exceptions.TooManyRedirects:
         # Tell the user their URL was bad and try a different one
         randomAdvice = {
-            "id" : r[ 'slip'][ 'Error'],
-            "advice" : r[ 'slip'][ 'Too many redirects.'],
+            "id": r['slip']['Error'],
+            "advice": r['slip']['Too many redirects.'],
         }
     except requests.exceptions.Timeout:
         # Maybe set up for a retry, or continue in a retry loop
         randomAdvice = {
-            "id" : r[ 'slip'][ 'Error'],
-            "advice" : r[ 'slip'][ 'Timeout.'],
+            "id": r['slip']['Error'],
+            "advice": r['slip']['Timeout.'],
         }
     except requests.exceptions.ConnectionError:
         # DNS failure, refused connection, etc
         randomAdvice = {
-            "id" : r[ 'slip'][ 'Error'],
-            "advice" : r[ 'slip'][ 'Connection Error.'],
+            "id": r['slip']['Error'],
+            "advice": r['slip']['Connection Error.'],
         }
     except requests.exceptions.HTTPError:
         # invalid HTTP response
         randomAdvice = {
-            "id" : r[ 'slip'][ 'Error'],
-            "advice" : r[ 'slip'][ 'Invalid HTTP response.'],
+            "id": r['slip']['Error'],
+            "advice": r['slip']['Invalid HTTP response.'],
         }
     except requests.exceptions.RequestException as e:
         # catastrophic error. bail.
         randomAdvice = {
-            "id" : r[ 'slip'][ 'Error'],
-            "advice" : r[ 'slip'][ 'Catastrophic Error.'],
+            "id": r['slip']['Error'],
+            "advice": r['slip']['Catastrophic Error.'],
         }
 
     return randomAdvice
