@@ -4,12 +4,12 @@ A simple web application used in demo.
 """
 from setuptools import find_packages, setup
 
-with open('README.md', 'r') as f:
+with open('README.rst', 'r') as f:
     long_description = f.read()
 
 setup(
    name='demo-webapp',
-   version='0.0.2',
+   version='0.0.3',
    author='Sebastien Pittet',
    author_email='sebastien@pittet.org',
    description='a simple web-app based on flask',
@@ -17,7 +17,7 @@ setup(
    url='https://github.com/SebastienPittet/demo-webapp',
    keywords='demo exoscale',
    packages=find_packages(),
-   license='LICENSE.txt',
+   license='MIT',
    platforms='any',
    install_requires=[
        "Flask",
