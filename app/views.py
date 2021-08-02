@@ -19,6 +19,7 @@ def nocache(view): # avoid caching
         return response
     return update_wrapper(no_cache, view)
 
+
 def getRandomAdvice():
     try:
         r = get('https://api.adviceslip.com/advice').json()
@@ -72,8 +73,14 @@ def main():
 
     return render_template('index.html',
                            title="Demo webapp",
-                           server = server_name,
-                           advice = getRandomAdvice())
+                           server=server_name,
+                           advice=getRandomAdvice())
+
+
+# Testing to check if it works
+@app.route('/test')
+def test():
+    return "OK!"
 
 
 if __name__ == "__main__":
