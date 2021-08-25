@@ -24,5 +24,5 @@ From the release of August 1st, it fetch a random advice from
    :target: https://lgtm.com/projects/g/SebastienPittet/demo-webapp/alerts/
 .. |Language grade: Python| image:: https://img.shields.io/lgtm/grade/python/g/SebastienPittet/demo-webapp.svg?logo=lgtm&logoWidth=18
    :target: https://lgtm.com/projects/g/SebastienPittet/demo-webapp/context:python
-.. |Build Status| image:: https://travis-ci.com/SebastienPittet/demo-webapp.svg?branch=master
-   :target: https://travis-ci.com/SebastienPittet/demo-webapp
+.. |Build Status| image:: https://app.travis-ci.com/SebastienPittet/demo-webapp.svg?branch=master
+    :target: https://app.travis-ci.com/SebastienPittet/demo-webapp
