@@ -1,12 +1,18 @@
 from flask import render_template
 import socket
 import time
+import math                   # used in heavy_computation
+from random import randrange  # used in heavy_computation
 from requests import get
 from flask import make_response
 from functools import wraps, update_wrapper
 from datetime import datetime
 from app import app
 
+APP_TITLE = "Demo Webapp"
+
+# Tuned in for returning a response in 1 to 5 seconds in average on Exoscale
+seed = 50_000_000
 
 def nocache(view): # avoid caching
     @wraps(view)
@@ -19,6 +25,19 @@ def nocache(view): # avoid caching
         return response
     return update_wrapper(no_cache, view)
 
+
+def heavy_computation():
+    """
+    Performs an unreasonably long CPU-bound calculation,
+    and returns the result and the time it took.
+    """
+    start = time.time()
+    x = 0.0001
+    for _ in range(0, randrange(seed)):
+        x += math.sqrt(x)
+    end = time.time()
+    duration = f"{end - start:.2f}"
+    return x, duration
 
 def getRandomAdvice():
     try:
@@ -62,7 +81,7 @@ def getRandomAdvice():
 
 @app.route("/")
 @app.route("/index")
-@nocache # avoid caching on this view
+@nocache  # avoid caching on this view
 def main():
     hostname = socket.gethostname()
     ip_addr = get('https://api.ipify.org').text
@@ -72,10 +91,21 @@ def main():
               'time_request':time_request}
 
     return render_template('index.html',
-                           title="Demo webapp",
+                           title=APP_TITLE,
                            server=server_name,
                            advice=getRandomAdvice())
 
+
+@app.route("/slow")
+@nocache  # avoid caching on this view
+def slow():
+
+    number, seconds = heavy_computation()
+
+    return render_template('slow.html',
+                           title=APP_TITLE,
+                           number=number,
+                           duration=seconds)
 
 # Testing to check if it works
 @app.route('/test')

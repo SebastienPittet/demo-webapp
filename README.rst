@@ -20,6 +20,8 @@ differently in the future.
 From the release of August 1st, it fetch a random advice from
 `adviceslip.com Open API <https://api.adviceslip.com/>`__.
 
+October, 1st: added /slow to prepare some horizontal autoscaling demos.
+
 .. |Total alerts| image:: https://img.shields.io/lgtm/alerts/g/SebastienPittet/demo-webapp.svg?logo=lgtm&logoWidth=18
    :target: https://lgtm.com/projects/g/SebastienPittet/demo-webapp/alerts/
 .. |Language grade: Python| image:: https://img.shields.io/lgtm/grade/python/g/SebastienPittet/demo-webapp.svg?logo=lgtm&logoWidth=18
