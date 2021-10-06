@@ -3,22 +3,13 @@
 {% block navigation %}
 <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
 <li class="nav-item"><a href="/slow" class="nav-link">Heavy Calculation</a></li>
+<li class="nav-item"><a href="/api-proxy" class="nav-link">API Proxy</a></li>
 {% endblock %}
 
 {% block network %}
       <div class="row">
         <div class="col"><h5>Served by: {{ server.hostname }} <span class="badge rounded-pill bg-success">{{ server.ipaddr }}</span></h5>
           <p><small>at {{ server.time_request }}</small></p></div>
-      </div>
-      <div class="row">
-        <figure class="text-center">
-        <div class="col"><h2 class="display-6">Random advice</h2>
-            <blockquote>
-              <p><samp>N°{{advice.id}}: {{ advice.advice }}</samp></p>
-              <figcaption class="blockquote-footer">Someone famous in <cite title="AdviceSlip.com Public API">Adviceslip.com</cite></figcaption>
-            </blockquote>
-          </div>
-         </figure>
       </div>
         <figure class="text-center">
         <div class="row">
