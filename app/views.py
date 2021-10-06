@@ -106,12 +106,13 @@ def slow():
                            number=number,
                            duration=seconds)
 
+
 @app.route("/api-proxy")
 @nocache  # avoid caching on this view
 def apiproxy():
     return render_template('api-proxy.html',
-                            title=APP_TITLE + " - API Proxy",
-                            advice=getRandomAdvice())
+                           title=APP_TITLE + " - API Proxy",
+                           advice=getRandomAdvice())
 
 # Testing to check if it works
 @app.route('/test')
