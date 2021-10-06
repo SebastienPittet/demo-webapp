@@ -3,17 +3,18 @@
 {% block navigation %}
 <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Home</a></li>
 <li class="nav-item"><a href="/slow" class="nav-link active">Heavy Calculation</a></li>
+<li class="nav-item"><a href="/api-proxy" class="nav-link">API Proxy</a></li>
+
 {% endblock %}
 
 {% block slow %}
       <div class="row">
         <figure class="text-center">
-        <div class="col"><h2 class="display-6">Heavy calculation</h2></div> 
+        <div class="col"><h2 class="display-6">Result of LOOONG Calculation</h2></div> 
         </figure>
       </div>
-        <div class="row">
-          <figure class="text-center">
-          <p class="font-weight-bold">This is the result of a looooong calculation (slow):</p>
+      <div class="row">
+        <figure class="text-center">
           <p class="font-weight-light">Number: {{ number }}</p>
           <p class="font-weight-light">Duration: {{ duration }}</p>
         </figure>

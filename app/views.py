@@ -91,9 +91,8 @@ def main():
               'time_request':time_request}
 
     return render_template('index.html',
-                           title=APP_TITLE,
-                           server=server_name,
-                           advice=getRandomAdvice())
+                           title=APP_TITLE + " - Home",
+                           server=server_name)
 
 
 @app.route("/slow")
@@ -103,9 +102,17 @@ def slow():
     number, seconds = heavy_computation()
 
     return render_template('slow.html',
-                           title=APP_TITLE,
+                           title=APP_TITLE + " - Slow",
                            number=number,
                            duration=seconds)
+
+
+@app.route("/api-proxy")
+@nocache  # avoid caching on this view
+def apiproxy():
+    return render_template('api-proxy.html',
+                           title=APP_TITLE + " - API Proxy",
+                           advice=getRandomAdvice())
 
 # Testing to check if it works
 @app.route('/test')

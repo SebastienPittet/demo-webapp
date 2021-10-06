@@ -9,7 +9,7 @@ with open('README.rst', 'r') as f:
 
 setup(
    name='demo-webapp',
-   version='0.0.4',
+   version='0.0.5',
    author='Sebastien Pittet',
    author_email='sebastien@pittet.org',
    description='a simple web-app based on flask',
