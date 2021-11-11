@@ -114,6 +114,12 @@ def apiproxy():
                            title=APP_TITLE + " - API Proxy",
                            advice=getRandomAdvice())
 
+@app.route("/database")
+@nocache  # avoid caching on this view
+def database():
+    return render_template('database.html',
+                           title=APP_TITLE + " - Database",)
+
 # Testing to check if it works
 @app.route('/test')
 def test():
