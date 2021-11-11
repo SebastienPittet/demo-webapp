@@ -114,6 +114,7 @@ def apiproxy():
                            title=APP_TITLE + " - API Proxy",
                            advice=getRandomAdvice())
 
+
 @app.route("/database")
 @nocache  # avoid caching on this view
 def database():
