@@ -118,6 +118,10 @@ def apiproxy():
 @app.route("/database")
 @nocache  # avoid caching on this view
 def database():
+    # open database, create schema if not exist
+    # load data from ..?
+    # create some statistics
+
     return render_template('database.html',
                            title=APP_TITLE + " - Database",)
 
