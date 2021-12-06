@@ -125,6 +125,21 @@ def database():
     return render_template('database.html',
                            title=APP_TITLE + " - Database",)
 
+
+@app.route("/pingtimes")
+@nocache  # avoid caching on this view
+def pingtimes():
+    return render_template('pingtimes.html',
+                           title=APP_TITLE + " - Pingtimes",)
+
+
+@app.route("/links")
+@nocache  # avoid caching on this view
+def links():
+    return render_template('links.html',
+                           title=APP_TITLE + " - Links",)
+
+
 # Testing to check if it works
 @app.route('/test')
 def test():
