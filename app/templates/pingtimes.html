@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block navigation %}
+<li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+<li class="nav-item"><a href="/slow" class="nav-link" aria-current="page">Heavy Calculation</a></li>
+<li class="nav-item"><a href="/api-proxy" class="nav-link">API Proxy</a></li>
+<li class="nav-item"><a href="/database" class="nav-link">Database</a></li>
+<li class="nav-item"><a href="/pingtimes" class="nav-link active">Pingtimes</a></li>
+<li class="nav-item"><a href="/links" class="nav-link">Links</a></li>
+{% endblock %}
+
+{% block slow %}
+      <div class="row">
+        <figure class="text-center">
+            <div class="row">
+              <div class="col"><h2 class="display-6">Ping times from your location</h2></div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="shadow-lg p-3 mb-5 bg-body rounded">
+                  <div class="w-auto p-3" style="background-color: #eee;">
+                    <div class="ratio ratio-4x3"><iframe src="https://sos-ch-dk-2.exo.io/ping-times/index.html"></iframe></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
+      </div>
+{% endblock %}
