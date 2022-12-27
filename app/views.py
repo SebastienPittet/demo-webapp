@@ -9,6 +9,29 @@ from functools import wraps, update_wrapper
 from datetime import datetime
 from app import app
 
+# Metrics in prometheus format
+from prometheus_client import make_wsgi_app
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from werkzeug.serving import run_simple
+from flask_prometheus_metrics import register_metrics
+
+
+# Add OpenSearch handler to python logger
+import logging
+from opensearch_logger import OpenSearchHandler
+
+handler = OpenSearchHandler(
+    index_name="demo-webapp",
+    hosts=["https://opensearch.pittet.org:9200"],
+    http_auth=("admin", "somepassword"),
+    http_compress=True,
+    use_ssl=True,
+    verify_certs=False,
+    ssl_assert_hostname=False,
+    ssl_show_warn=False,
+)
+
+
 APP_TITLE = "Demo Webapp"
 
 # Tuned in for returning a response in 1 to 5 seconds in average on Exoscale
@@ -36,8 +59,9 @@ def heavy_computation():
     for _ in range(0, randrange(seed)):
         x += math.sqrt(x)
     end = time.time()
-    duration = f"{end - start:.2f}"
-    return x, duration
+    elapsed_time = f"{end - start:.2f}"
+    logger.info(f"Database operation took {elapsed_time} seconds")
+    return x, elapsed_time
 
 def getRandomAdvice():
     try:
@@ -148,3 +172,16 @@ def test():
 
 if __name__ == "__main__":
     app.run()
+
+# Log
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+logger.addHandler(handler)
+
+# provide app's version and deploy environment/config name to set a gauge metric
+register_metrics(app, app_version="v0.1.2", app_config="staging")
+
+# Plug metrics WSGI app to your main app with dispatcher
+dispatcher = DispatcherMiddleware(app.wsgi_app, {"/metrics": make_wsgi_app()})
+
+run_simple(hostname="localhost", port=5000, application=dispatcher)
