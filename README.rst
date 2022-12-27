@@ -1,10 +1,6 @@
 demo-webapp
 ===========
 
-|Total alerts|
-
-|Language grade: Python|
-
 |Build Status|
 
 This application is written in Python and based on
